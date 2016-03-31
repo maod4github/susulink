@@ -1,0 +1,42 @@
+<div class='container'>
+  <form name='signupForm' novalidate ng-submit='signup(signupForm.$valid)' style='padding-top: 30px;'>
+    <div class='form-group' ng-class='{ "has-error": signupForm.mobileNo.$dirty && signupForm.mobileNo.$invalid }'>
+      <label for='mobileNo' class='control-label'>
+        <span class='text-danger'>*</span> 手机号码 : 
+      </label>
+      <input type='text' name='mobileNo' id='mobileNo' class='form-control' ng-model='user.mobileNo' maxlength='11' required fv-mobile-no fv-inexistent-mobile-no />
+      <div class='help-block' ng-show='signupForm.mobileNo.$dirty && signupForm.mobileNo.$invalid'>
+        <p ng-show='signupForm.mobileNo.$error.required'>请填写手机号码</p>
+        <p ng-show='!signupForm.mobileNo.$error.required && signupForm.mobileNo.$error.fvMobileNo'>请填写有效的手机号码</p>
+        <p ng-show='!signupForm.mobileNo.$error.required && !signupForm.mobileNo.$error.fvMobileNo && signupForm.mobileNo.$error.fvInexistentMobileNo'>该手机号码已存在</p>
+      </div>
+    </div>
+    <div class='form-group' ng-class='{ "has-error": signupForm.signinPwd.$dirty && signupForm.signinPwd.$invalid }'>
+      <label for='signinPwd' class='control-label'>
+        <span class='text-danger'>*</span> 登入密码 : 
+      </label>
+      <input type='password' name='signinPwd' id='signinPwd' class='form-control' ng-model='user.signinPwd' maxlength='16' required fv-signin-pwd />
+      <div class='help-block' ng-show='signupForm.signinPwd.$dirty && signupForm.signinPwd.$invalid'>
+        <p ng-show='signupForm.signinPwd.$error.required'>请填写登入密码</p>
+        <p ng-show='!signupForm.signinPwd.$error.required && signupForm.signinPwd.$error.fvSigninPwd'>登入密码长度为6~16个字符</p>
+      </div>
+    </div>
+    <div class='form-group' ng-class='{ "has-error": signupForm.confirmPwd.$dirty && signupForm.confirmPwd.$invalid }'>
+      <label for='confirmPwd' class='control-label'>
+        <span class='text-danger'>*</span> 确认密码
+      </label>
+      <input type='password' name='confirmPwd' ng-model='user.confirmPwd' id='confirmPwd' class='form-control' maxlength='16' required fv-eq='#signinPwd' />
+      <div class='help-block' ng-show='signupForm.confirmPwd.$dirty && signupForm.confirmPwd.$invalid'>
+        <p ng-show='signupForm.confirmPwd.$error.required'>请确认密码</p>
+        <p ng-show='!signupForm.confirmPwd.$error.required && signupForm.confirmPwd.$error.fvEq'>密码不一致</p>
+      </div>
+    </div>
+    <div class='form-group'>
+      <button type='submit' class='btn btn-success' ng-disabled='signupForm.$invalid'>提交</button>
+      <a href='#/signin' class='btn btn-default' data-toggle='tooltip' title='有账号了？去登录吧。 ^_^!'>登入</a>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+$('[data-toggle="tooltip"]').tooltip();
+</script>
